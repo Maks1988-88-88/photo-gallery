@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import s from 'components/ImageGallery/ImageGallery.module.css';
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 
-function ImageGallery({ query, add }) {
+function ImageGallery({ query, add, btnName }) {
   console.log(query);
   return (
     <ul className={s.ImageGallery}>
@@ -13,6 +13,7 @@ function ImageGallery({ query, add }) {
           tags={el.author}
           add={add}
           id={el.id}
+          btnName={btnName}
         />
       ))}
     </ul>

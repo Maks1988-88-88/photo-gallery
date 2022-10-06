@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import s from 'components/ImageGalleryItem/ImageGalleryItem.module.css';
 
-export default function ImageGalleryItem({ webformatURL, tags, add, id }) {
+export default function ImageGalleryItem({ webformatURL, tags, add, id, btnName }) {
   return (
     <li className={s.ImageGalleryItem}>
       <img
@@ -14,7 +14,7 @@ export default function ImageGalleryItem({ webformatURL, tags, add, id }) {
           add(id, `https://picsum.photos/id/${webformatURL}/300/300`, tags)
         }
       >
-        add
+        {btnName}
       </button>
     </li>
   );

@@ -6,8 +6,6 @@ import ImageGallery from 'components/ImageGallery/ImageGallery';
 import ButtonImgLimit from 'components/ButtonImgLimit/ButtonImgLimit';
 import Header from 'components/Header/Header';
 
-
-
 function App() {
   const [query, setQuery] = useState([]);
   const [page, setPage] = useState(1);
@@ -16,39 +14,40 @@ function App() {
   const [status, setStatus] = useState('Home');
   const [statusButtonImgLimit, setStatusButtonImgLimit] = useState(20);
 
-
   useEffect(() => {
     picsumApi(page, limitImagesList).then(query => setQuery(query));
     // console.log('++');
   }, [page, limitImagesList]);
 
-  const newLimitImg = (limit) => {
+  const newLimitImg = limit => {
     setLimitImagesList(limit);
     setStatusButtonImgLimit(limit);
   };
 
   const add = (id, addImg, alt) => {
-
-    const checker = favouriteImg.some(el => el.id === id)
-    if (checker === true) return
+    const checker = favouriteImg.some(el => el.id === id);
+    if (checker === true) return;
     console.log('checker:', checker);
-    const updateFavourite = {id:id, img: addImg, author: alt }
+    const updateFavourite = { id: id, img: addImg, author: alt };
     setFavouriteImg([...favouriteImg, updateFavourite]);
-    console.log('favouriteImg:',favouriteImg);
+    console.log('favouriteImg:', favouriteImg);
   };
 
-   const statusChange = change => {
-     setStatus(change);
-     console.log(change);
-   };
-  
+  const remove = (id, addImg, alt) => {
+    setFavouriteImg(favouriteImg.filter(el => el.id !== id));
+  };
+
+  const statusChange = change => {
+    setStatus(change);
+    console.log(change);
+  };
 
   return (
     <div className="App">
       <Header statusChange={statusChange} />
       {status === 'Home' && (
         <>
-          <ImageGallery query={query} add={add} />
+          <ImageGallery query={query} add={add} btnName={'add'} />
           {statusButtonImgLimit === 40 && (
             <ButtonImgLimit onClick={newLimitImg} limit={20} />
           )}
@@ -61,7 +60,7 @@ function App() {
         </>
       )}
       {status === 'Favourite' && (
-        <ImageGallery query={favouriteImg} add={add} />
+        <ImageGallery query={favouriteImg} add={remove} btnName={'remove'} />
       )}
 
       {/* <ImageGallery query={query} add={add} /> */}
