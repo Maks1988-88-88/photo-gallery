@@ -1,9 +1,9 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import s from 'components/ImageGallery/ImageGallery.module.css';
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 
-function ImageGallery({ query }) {
-    console.log(query);
+function ImageGallery({ query, add }) {
+  console.log(query);
   return (
     <ul className={s.ImageGallery}>
       {query.map(el => (
@@ -11,20 +11,22 @@ function ImageGallery({ query }) {
           key={el.id}
           webformatURL={el.id}
           tags={el.author}
+          add={add}
+          id={el.id}
         />
       ))}
     </ul>
   );
 }
 
-// ImageGallery.propTypes = {
-//   query: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number,
-//       tags: PropTypes.string,
-//       webformatURL: PropTypes.string,
-//     }),
-//   ),
-// };
+ImageGallery.propTypes = {
+  query: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      tags: PropTypes.string,
+      webformatURL: PropTypes.string,
+    }),
+  ),
+};
 
 export default ImageGallery;
