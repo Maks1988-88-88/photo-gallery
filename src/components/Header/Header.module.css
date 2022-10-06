@@ -1,0 +1,8 @@
+.headerNav {
+    display: flex;
+    justify-content: space-around;
+}
+
+.headerName {
+ margin: 10px;
+}
