@@ -4,8 +4,8 @@ import s from 'components/ButtonImgLimit/ButtonImgLimit.module.css';
 
 function ButtonImgLimit({ onClick, limit }) {
   return (
-    <button className={s.Button} type="button" onClick={()=>onClick(limit)}>
-      {limit}
+    <button className={s.Button} type="button" onClick={() => onClick(limit)}>
+      Change list on {limit}
     </button>
   );
 }

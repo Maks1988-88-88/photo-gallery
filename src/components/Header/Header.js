@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import s from 'components/Header/Header.module.css';
 
@@ -18,9 +18,8 @@ function Header({ statusChange }) {
   );
 }
 
-// Header.propTypes = {
-//   onClick: PropTypes.func.isRequired,
-//   limit: PropTypes.number,
-// };
+Header.propTypes = {
+  statusChange: PropTypes.func.isRequired,
+};
 
 export default Header;

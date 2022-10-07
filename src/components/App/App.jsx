@@ -5,6 +5,7 @@ import picsumApi from 'Api/picsumApi';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import ButtonImgLimit from 'components/ButtonImgLimit/ButtonImgLimit';
 import Header from 'components/Header/Header';
+import Pagination from 'components/Pagination/Pagination';
 
 function App() {
   const [query, setQuery] = useState([]);
@@ -16,7 +17,6 @@ function App() {
 
   useEffect(() => {
     picsumApi(page, limitImagesList).then(query => setQuery(query));
-    // console.log('++');
   }, [page, limitImagesList]);
 
   const newLimitImg = limit => {
@@ -27,10 +27,8 @@ function App() {
   const add = (id, addImg, alt) => {
     const checker = favouriteImg.some(el => el.id === id);
     if (checker === true) return;
-    console.log('checker:', checker);
     const updateFavourite = { id: id, img: addImg, author: alt };
     setFavouriteImg([...favouriteImg, updateFavourite]);
-    console.log('favouriteImg:', favouriteImg);
   };
 
   const remove = (id, addImg, alt) => {
@@ -39,7 +37,15 @@ function App() {
 
   const statusChange = change => {
     setStatus(change);
-    console.log(change);
+  };
+
+  const nexPage = page => {
+    if (page === 25) return;
+    setPage(page + 1);
+  };
+  const prewPage = page => {
+    if (page === 1) return;
+    setPage(page - 1);
   };
 
   return (
@@ -55,17 +61,14 @@ function App() {
             <ButtonImgLimit onClick={newLimitImg} limit={40} />
           )}
 
-          {/* <ButtonImgLimit onClick={newLimitImg} limit={20} />
-          <ButtonImgLimit onClick={newLimitImg} limit={40} /> */}
+
+          <Pagination page={page} nexPage={nexPage} prewPage={prewPage} />
         </>
       )}
       {status === 'Favourite' && (
         <ImageGallery query={favouriteImg} add={remove} btnName={'remove'} />
       )}
 
-      {/* <ImageGallery query={query} add={add} /> */}
-      {/* <ButtonImgLimit onClick={newLimitImg} limit={20} />
-      <ButtonImgLimit onClick={newLimitImg} limit={40} /> */}
     </div>
   );
 }

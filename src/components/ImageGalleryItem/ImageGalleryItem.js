@@ -10,6 +10,7 @@ export default function ImageGalleryItem({ webformatURL, tags, add, id, btnName 
         className={s.ImageGalleryItemImage}
       />
       <button
+        className={s.btnGalleryImg}
         onClick={() =>
           add(id, `https://picsum.photos/id/${webformatURL}/300/300`, tags)
         }

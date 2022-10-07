@@ -3,7 +3,6 @@ import s from 'components/ImageGallery/ImageGallery.module.css';
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 
 function ImageGallery({ query, add, btnName }) {
-  console.log(query);
   return (
     <ul className={s.ImageGallery}>
       {query.map(el => (
