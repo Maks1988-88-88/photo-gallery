@@ -1,3 +1,5 @@
+Use in project: JavaScript, HTML5, CSS3, React, module css,  Modern-normalize, Prop-types, Fetch
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
