@@ -8,16 +8,24 @@ import Header from 'components/Header/Header';
 import Pagination from 'components/Pagination/Pagination';
 
 function App() {
+  const favouriteImgStorage = localStorage.getItem('favouriteImg');
+  const parsedFavourite = JSON.parse(favouriteImgStorage);
+  // console.log('parsedFavourite', parsedFavourite);
+
   const [query, setQuery] = useState([]);
   const [page, setPage] = useState(1);
   const [limitImagesList, setLimitImagesList] = useState(20);
-  const [favouriteImg, setFavouriteImg] = useState([]);
+  const [favouriteImg, setFavouriteImg] = useState(parsedFavourite || []);
   const [status, setStatus] = useState('Home');
   const [statusButtonImgLimit, setStatusButtonImgLimit] = useState(20);
 
   useEffect(() => {
     picsumApi(page, limitImagesList).then(query => setQuery(query));
   }, [page, limitImagesList]);
+
+  useEffect(() => {
+    localStorage.setItem('favouriteImg', JSON.stringify(favouriteImg));
+  }, [favouriteImg]);
 
   const newLimitImg = limit => {
     setLimitImagesList(limit);
@@ -61,14 +69,12 @@ function App() {
             <ButtonImgLimit onClick={newLimitImg} limit={40} />
           )}
 
-
           <Pagination page={page} nexPage={nexPage} prewPage={prewPage} />
         </>
       )}
       {status === 'Favourite' && (
         <ImageGallery query={favouriteImg} add={remove} btnName={'remove'} />
       )}
-
     </div>
   );
 }

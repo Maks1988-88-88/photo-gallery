@@ -5,13 +5,13 @@ import s from 'components/Pagination/Pagination.module.css';
 function Pagination({ page, nexPage, prewPage }) {
   return (
     <div className={s.pagination}>
-      <a onClick={() => prewPage(page)} className={s.paginationArrow}>
+      <button onClick={() => prewPage(page)} className={s.button}>
         «
-      </a>
-      <a className={s.active}>{page}</a>
-      <a onClick={() => nexPage(page)} className={s.paginationArrow}>
+      </button>
+      <p className={s.active}>{page}</p>
+      <button onClick={() => nexPage(page)} className={s.button}>
         »
-      </a>
+      </button>
     </div>
   );
 }
