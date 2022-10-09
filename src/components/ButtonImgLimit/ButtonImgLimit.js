@@ -12,7 +12,7 @@ function ButtonImgLimit({ onClick, limit }) {
 
 ButtonImgLimit.propTypes = {
   onClick: PropTypes.func.isRequired,
-  limit: PropTypes.number,
+  limit: PropTypes.number.isRequired,
 };
 
 export default ButtonImgLimit;

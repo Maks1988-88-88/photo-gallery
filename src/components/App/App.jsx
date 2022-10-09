@@ -6,11 +6,12 @@ import ImageGallery from 'components/ImageGallery/ImageGallery';
 import ButtonImgLimit from 'components/ButtonImgLimit/ButtonImgLimit';
 import Header from 'components/Header/Header';
 import Pagination from 'components/Pagination/Pagination';
+import Modal from 'components/Modal/Modal';
+
 
 function App() {
   const favouriteImgStorage = localStorage.getItem('favouriteImg');
   const parsedFavourite = JSON.parse(favouriteImgStorage);
-  // console.log('parsedFavourite', parsedFavourite);
 
   const [query, setQuery] = useState([]);
   const [page, setPage] = useState(1);
@@ -18,6 +19,8 @@ function App() {
   const [favouriteImg, setFavouriteImg] = useState(parsedFavourite || []);
   const [status, setStatus] = useState('Home');
   const [statusButtonImgLimit, setStatusButtonImgLimit] = useState(20);
+  const [showModal, setShowModal] = useState(false);
+  const [modalImg, setModalImg] = useState(null);
 
   useEffect(() => {
     picsumApi(page, limitImagesList).then(query => setQuery(query));
@@ -56,12 +59,26 @@ function App() {
     setPage(page - 1);
   };
 
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const FindmodalImg = (id, addImg, alt) => {
+    setModalImg({ id: id, img: addImg, author: alt });
+  };
+
   return (
     <div className="App">
       <Header statusChange={statusChange} />
       {status === 'Home' && (
         <>
-          <ImageGallery query={query} add={add} btnName={'add'} />
+          <ImageGallery
+            query={query}
+            add={add}
+            btnName={'add'}
+            toggleModal={toggleModal}
+            bigImg={FindmodalImg}
+          />
           {statusButtonImgLimit === 40 && (
             <ButtonImgLimit onClick={newLimitImg} limit={20} />
           )}
@@ -73,8 +90,15 @@ function App() {
         </>
       )}
       {status === 'Favourite' && (
-        <ImageGallery query={favouriteImg} add={remove} btnName={'remove'} />
+        <ImageGallery
+          query={favouriteImg}
+          add={remove}
+          btnName={'remove'}
+          toggleModal={toggleModal}
+          bigImg={FindmodalImg}
+        />
       )}
+      {showModal && <Modal closeModal={toggleModal} modalImg={modalImg} />}
     </div>
   );
 }

@@ -19,7 +19,7 @@ function Pagination({ page, nexPage, prewPage }) {
 Pagination.propTypes = {
   nexPage: PropTypes.func.isRequired,
   prewPage: PropTypes.func.isRequired,
-  page: PropTypes.number,
+  page: PropTypes.number.isRequired,
 };
 
 export default Pagination;
